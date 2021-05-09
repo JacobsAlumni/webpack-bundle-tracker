@@ -62,8 +62,8 @@ Plugin.prototype.apply = function(compiler) {
       }
 
       var chunks = {};
-      stats.compilation.chunks.map(function(chunk){
-        var files = chunk.files.map(function(file){
+      stats.compilation.chunks.forEach(function(chunk){
+        var files = Array.from(chunk.files).map(function(file){
           var F = {name: file};
           var publicPath = self.options.publicPath || compiler.options.output.publicPath;
           if (publicPath) {
@@ -86,7 +86,7 @@ Plugin.prototype.apply = function(compiler) {
         var entryPoints = {};
         stats.compilation.entrypoints.forEach(function(value, entrypoint) {
         entrypointsChunks = value.chunks.map(function(chunk) {
-          var files = chunk.files.map(function(file){
+          var files = Array.from(chunk.files).map(function(file){
             var F = {name: file};
             var publicPath = self.options.publicPath || compiler.options.output.publicPath;
             if (publicPath) {
